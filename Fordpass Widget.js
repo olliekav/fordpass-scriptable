@@ -1424,13 +1424,13 @@ async function fetchCarData() {
     // Whether Vehicle is currently installing and OTA update (OTA) | Supported Vehicles Only
     carData.firmwareUpdating = vehicleStatus.firmwareUpgInProgress ? vehicleStatus.firmwareUpgInProgress.value === 'true' : undefined;
 
-    //distance to empty
-    if(vehicleStatus.fuel.distanceToEmpty) {
+    if(vehicleStatus.fuel) {
+        //distance to empty
         carData.distanceToEmpty = vehicleStatus.fuel.distanceToEmpty
+        
+        //fuel level
+        carData.fuelLevel = Math.floor(vehicleStatus.fuel.fuelLevel);
     }
-
-    //fuel level
-    carData.fuelLevel = Math.floor(vehicleStatus.fuel.fuelLevel);
 
     //position of car
     carData.position = await getPosition(vehicleStatus);
