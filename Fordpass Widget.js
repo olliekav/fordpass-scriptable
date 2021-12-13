@@ -1425,7 +1425,9 @@ async function fetchCarData() {
     carData.firmwareUpdating = vehicleStatus.firmwareUpgInProgress ? vehicleStatus.firmwareUpgInProgress.value === 'true' : undefined;
 
     //distance to empty
-    carData.distanceToEmpty = vehicleStatus.fuel.distanceToEmpty ? carData.distanceToEmpty : '0';
+    if(vehicleStatus.fuel.distanceToEmpty) {
+        carData.distanceToEmpty = vehicleStatus.fuel.distanceToEmpty
+    }
 
     //fuel level
     carData.fuelLevel = Math.floor(vehicleStatus.fuel.fuelLevel);
